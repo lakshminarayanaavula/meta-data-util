@@ -57,8 +57,6 @@ def generate_data_between(date_lst):
             i = i + 1
         file_name = f"../output/{month_dict[month]}_{year}.json"
         directory = os.path.dirname(file_name)
-        if not os.path.exists(directory):
-            os.makedirs(directory)
         with open(file_name, 'w') as f:
             final_data = {'data': {'analyticsRequestByParams': data_list}}
             json.dump(json.loads(json.dumps(final_data, ensure_ascii=True, indent=4)), f, indent=1)
