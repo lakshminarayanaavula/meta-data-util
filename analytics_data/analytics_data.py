@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 import random
+import os
 
 file_path = "../data/june1-15.json"
 
@@ -10,6 +11,7 @@ def is_leap_year(year):
         return True
     else:
         return False
+
 
 def load_data_filter(status):
     f = open(file_path)
@@ -54,6 +56,7 @@ def generate_data_between(date_lst):
             data_list.append(item)
             i = i + 1
         file_name = f"../output/{month_dict[month]}_{year}.json"
+        directory = os.path.dirname(file_name)
         with open(file_name, 'w') as f:
             final_data = {'data': {'analyticsRequestByParams': data_list}}
             json.dump(json.loads(json.dumps(final_data, ensure_ascii=True, indent=4)), f, indent=1)
@@ -75,9 +78,6 @@ def format_date(date_str, month, year):
         created_date = datetime.fromisoformat(date_str).replace(month=month, year=year, day=day)
         res = created_date.strftime("%Y-%m-%dT%H:%M:%S")
     return res
-
-
-
 
 
 def get_id(size, year, month):

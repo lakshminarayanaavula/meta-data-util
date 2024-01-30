@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 import random
+import os
 
 file_path = "../data/Aggregated1-15.json"
 
@@ -48,6 +49,9 @@ def generate_data_between(date_lst):
             data_list.append(item)
             i = i + 1
         file_name = f"../output/agg-data/{month_dict[month]}_{year}_agg.json"
+        directory = os.path.dirname(file_name)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
         with open(file_name, 'w') as f:
            final_data = {'data': {'analyticsAggregatedRequestByParams': data_list}}
            json.dump(json.loads(json.dumps(final_data, ensure_ascii=True, indent=4)), f, indent=1)
