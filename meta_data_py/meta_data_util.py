@@ -20,8 +20,8 @@ def create_schema():
                     data_type = field.get("dataType")
                     is_required = field.get("required", False)
                     is_foreign_key = field.get("foreignKey", False)
-                    foreign_key_info = field.get("foreignKeyInfo", {})
-                    if is_foreign_key:
+                    foreign_key_info = field.get("foreignKeyInfo")
+                    if is_foreign_key and foreign_key_info:
                         reference_table = foreign_key_info.get("parentObjectDbName")
                         reference_column = foreign_key_info.get("primaryKeyDbName")
                         if column_name == 'created_by' or column_name == 'modified_by' or column_name == 'org_id':
